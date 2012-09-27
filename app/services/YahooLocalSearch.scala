@@ -26,7 +26,7 @@ object YahooLocalSearch {
       .get()
     //    val body = res.get().getBody()
 
-    println(res.get().getBody())
+//    println(res.get().getBody())
     res.get().getBody()
   }
 
