@@ -26,7 +26,7 @@ object YahooLocalSearch {
       .setQueryParameter("sort", "dist")
       // 4136755b3cd84823420aec02ac373152 : yahooロコ
       // cd246abc0da32d9d0e4990a54e3bf0e4 : 全国寺社ガイド
-      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,cd246abc0da32d9d0e4990a54e3bf0e4、bf1929f6ab23005e9b80adf4fd0fc5ab")
+      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,bf1929f6ab23005e9b80adf4fd0fc5ab")
       .get()
     //    val body = res.get().getBody()
 
