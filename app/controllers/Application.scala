@@ -49,14 +49,14 @@ object Application extends Controller {
 
     var res = YahooLocalSearch.get(map): String
     var xml = scala.xml.XML.loadString(res)
-    //    println(res)
+//    println(res)
     var jsonresp = XML2JSON(xml)
-
+    
     Ok(views.txt.yls(jsonresp)).as(JSON).withHeaders("Access-Control-Allow-Origin" -> "*",
-      "Access-Control-Allow-Methods" -> "POST, GET,PUT, DELETE, OPT",
-      "Access-Control-Allow-Credentials" -> "true",
-      "Access-Control-Allow-Headers" -> "X-PINGOTHER",
-      "Access-Control-Max-Age" -> "86400")
+    												 "Access-Control-Allow-Methods" -> "POST, GET,PUT, DELETE, OPT",
+    												 "Access-Control-Allow-Credentials" -> "true",
+    												 "Access-Control-Allow-Headers" -> "X-PINGOTHER",
+    												 "Access-Control-Max-Age" -> "86400")
   }
 }
 
