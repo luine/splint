@@ -46,6 +46,10 @@ object Application extends Controller {
     val map = Map("query" -> request.queryString.getOrElse("q", Seq[String](""))(0),
       "lat" -> request.queryString.getOrElse("lat", Seq[String](""))(0),
       "lon" -> request.queryString.getOrElse("lon", Seq[String](""))(0))
+      
+      println(request.queryString.getOrElse("q", Seq[String](""))(0))
+      println(request.queryString.getOrElse("lat", Seq[String](""))(0))
+      println(request.queryString.getOrElse("lon", Seq[String](""))(0))
 
     var res = YahooLocalSearch.get(map): String
     var xml = scala.xml.XML.loadString(res)
