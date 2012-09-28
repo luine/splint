@@ -55,6 +55,8 @@ object Application extends Controller {
     var res = YahooLocalSearch.get(map): String
     var xml = scala.xml.XML.loadString(res)
     var jsonresp = XML2JSON(xml)
+    
+//    var hoge = 
 
     println(res);
     

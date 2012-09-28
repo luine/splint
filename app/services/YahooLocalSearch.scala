@@ -21,8 +21,10 @@ object YahooLocalSearch {
       .setQueryParameter("appid", API_KEY)
       .setQueryParameter("lat", args.getOrElse("lat", null))
       .setQueryParameter("lon", args.getOrElse("lon", null))
-      .setQueryParameter("dist", args.getOrElse("0.5", null))
+      .setQueryParameter("dist", args.getOrElse("0.05", null))
       .setQueryParameter("query", args.getOrElse("query", null))
+      .setQueryParameter("sort", "dist")
+      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152")
       .get()
     //    val body = res.get().getBody()
 
