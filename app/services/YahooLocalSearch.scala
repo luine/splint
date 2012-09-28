@@ -21,10 +21,12 @@ object YahooLocalSearch {
       .setQueryParameter("appid", API_KEY)
       .setQueryParameter("lat", args.getOrElse("lat", null))
       .setQueryParameter("lon", args.getOrElse("lon", null))
-      .setQueryParameter("dist", args.getOrElse("0.05", null))
+      .setQueryParameter("dist", args.getOrElse("0.5", null))
       .setQueryParameter("query", args.getOrElse("query", null))
       .setQueryParameter("sort", "dist")
-      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,cd246abc0da32d9d0e4990a54e3bf0e4")
+      // 4136755b3cd84823420aec02ac373152 : yahooロコ
+      // cd246abc0da32d9d0e4990a54e3bf0e4 : 全国寺社ガイド
+      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,cd246abc0da32d9d0e4990a54e3bf0e4、bf1929f6ab23005e9b80adf4fd0fc5ab")
       .get()
     //    val body = res.get().getBody()
 
