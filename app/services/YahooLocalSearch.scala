@@ -24,7 +24,7 @@ object YahooLocalSearch {
       .setQueryParameter("dist", args.getOrElse("0.05", null))
       .setQueryParameter("query", args.getOrElse("query", null))
       .setQueryParameter("sort", "dist")
-      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152")
+      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,cd246abc0da32d9d0e4990a54e3bf0e4")
       .get()
     //    val body = res.get().getBody()
 
