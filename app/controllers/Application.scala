@@ -19,16 +19,14 @@ object Application extends Controller {
    * もげえええ
    */
   def index = Action {
-    val homePage = WS.url("http://ally.to/version/ios.xml").get()
-    println(homePage.get().getBody())
-    Ok(views.html.index(homePage.get().getBody()))
+    Ok(views.html.index())
   }
 
   /**
    * あひゅおおお
    */
   def nyoro = Action {
-    Ok(views.html.index("ahhyooooooo"))
+    Ok(views.html.index())
   }
 
   /**
@@ -39,28 +37,32 @@ object Application extends Controller {
     println(request.queryString.getOrElse("id", ""))
 
     //    GoogleStreetView.getWithLatLon(param)
-    Ok(views.html.index("ahhyooooooo"))
+    Ok(views.html.index())
   }
 
-  def yls = Action { request =>
-    val map = Map("query" -> request.queryString.getOrElse("q", Seq[String](""))(0),
-      "lat" -> request.queryString.getOrElse("lat", Seq[String](""))(0),
-      "lon" -> request.queryString.getOrElse("lon", Seq[String](""))(0))
-      
-      println(request.queryString.getOrElse("q", Seq[String](""))(0))
-      println(request.queryString.getOrElse("lat", Seq[String](""))(0))
-      println(request.queryString.getOrElse("lon", Seq[String](""))(0))
+  def yls = Action { implicit request =>
+    val params: collection.mutable.Map[String, Seq[String]] = collection.mutable.Map()
+    params ++= request.body.asFormUrlEncoded.getOrElse[Map[String, Seq[String]]] { Map.empty }
+    params ++= request.queryString
+    val map = Map("query" -> params.getOrElse("q", Seq[String](""))(0),
+      "lat" -> params.getOrElse("lat", Seq[String](""))(0),
+      "lon" -> params.getOrElse("lon", Seq[String](""))(0))
+
+    println(params.get("q"))
+    println(params.getOrElse("lat", Seq[String](""))(0))
+    println(params.getOrElse("lon", Seq[String](""))(0))
 
     var res = YahooLocalSearch.get(map): String
     var xml = scala.xml.XML.loadString(res)
-//    println(res)
     var jsonresp = XML2JSON(xml)
+
+    println(res);
     
     Ok(views.txt.yls(jsonresp)).as(JSON).withHeaders("Access-Control-Allow-Origin" -> "*",
-    												 "Access-Control-Allow-Methods" -> "POST, GET,PUT, DELETE, OPT",
-    												 "Access-Control-Allow-Credentials" -> "true",
-    												 "Access-Control-Allow-Headers" -> "X-PINGOTHER",
-    												 "Access-Control-Max-Age" -> "86400")
+      "Access-Control-Allow-Methods" -> "POST, GET,PUT, DELETE, OPT",
+      "Access-Control-Allow-Credentials" -> "true",
+      "Access-Control-Allow-Headers" -> "X-PINGOTHER",
+      "Access-Control-Max-Age" -> "86400")
   }
 }
 
