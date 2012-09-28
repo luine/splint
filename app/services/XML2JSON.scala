@@ -37,7 +37,7 @@ object XML2JSON {
           case c if c.length == 1 && c.first.isInstanceOf[Text] =>
             c.first match {
               case Text(data) =>
-                env += xml.label -> (JSONString(data) :: env.get(xml.label))
+                env += xml.label -> (JSONString(data.replaceAll("\n", "\\n")) :: env.get(xml.label))
             }
           case c => {
             var foo = c.foldLeft(emptyMap) {
@@ -72,7 +72,7 @@ object XML2JSON {
         //
         case c if c.length == 1 && c.first.isInstanceOf[Text] => c.first match {
           case Text(data) =>
-            Some(JSONEntry(xml.label, JSONString(data)))
+            Some(JSONEntry(xml.label, JSONString(data.replaceAll("\n", "\\n"))))
         }
         case c => {
           val objects = (for (i <- c; j <- _toJSON(i)) yield j).toList
@@ -104,7 +104,7 @@ object XML2JSON {
       }
       case JSONEntry(key, value) =>
         wrap(key) + " : " + format(value, indent)
-      case JSONString(str) => wrap(str)
+      case JSONString(str) => wrap(str).replaceAll("\n", "\\n")
     }
     format(o, 0)
   }
