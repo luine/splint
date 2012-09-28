@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET		/nyoro						controllers.Application.nyoro
 GET		/streetview					controllers.Application.streetview
 GET		/yls						controllers.Application.yls
+POST	/yls						controllers.Application.yls
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
