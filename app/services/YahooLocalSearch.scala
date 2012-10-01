@@ -7,15 +7,34 @@ import scala.io.Source
 import scala.xml.XML
 import scala.xml.parsing.{ ConstructingParser, XhtmlParser }
 import scala.collection.mutable.HashMap
+import scala.util.Random
 
 object YahooLocalSearch {
 
   val API_URL = "http://search.olp.yahooapis.jp/OpenLocalPlatform/V1/localSearch?"
   val API_KEY = "mwuIWKOxg66hhfaioIcoO7mId_YJFiwIcFEWOcrCV9Jy1cD.4Mj2T6QJMWip7MeFI_mJ"
 
-  def get(args: Map[String, String]):String = {
+  def get(args: Map[String, String]): String = {
     println("reached yls get method")
     println(args.apply("query"))
+
+    // 4136755b3cd84823420aec02ac373152 : yahooロコ
+    // cd246abc0da32d9d0e4990a54e3bf0e4 : 全国寺社ガイド
+    // bf1929f6ab23005e9b80adf4fd0fc5ab : なんかママ向けのカフェとかそういうやつ
+
+    var cid = ""
+    val random = new Random
+    var seed = new String
+    seed += ((random.nextInt(10)).toString)
+
+    // ランダムにカセットを切り替える
+    if (Integer.parseInt(seed) % 3 == 0) {
+      cid = "4136755b3cd84823420aec02ac373152"
+    } else if (Integer.parseInt(seed) % 3 == 1) {
+      cid = "cd246abc0da32d9d0e4990a54e3bf0e4"
+    } else {
+      cid = "bf1929f6ab23005e9b80adf4fd0fc5ab"
+    }
 
     val res = WS.url(API_URL)
       .setQueryParameter("appid", API_KEY)
@@ -24,13 +43,12 @@ object YahooLocalSearch {
       .setQueryParameter("dist", args.getOrElse("0.5", null))
       .setQueryParameter("query", args.getOrElse("query", null))
       .setQueryParameter("sort", "dist")
-      // 4136755b3cd84823420aec02ac373152 : yahooロコ
-      // cd246abc0da32d9d0e4990a54e3bf0e4 : 全国寺社ガイド
-      .setQueryParameter("cid", "4136755b3cd84823420aec02ac373152,bf1929f6ab23005e9b80adf4fd0fc5ab")
+
+      .setQueryParameter("cid", cid)
       .get()
     //    val body = res.get().getBody()
 
-//    println(res.get().getBody())
+    //    println(res.get().getBody())
     res.get().getBody()
   }
 

@@ -58,7 +58,7 @@ object Application extends Controller {
     
 //    var hoge = 
 
-    println(res);
+//    println(res);
     
     Ok(views.txt.yls(jsonresp)).as(JSON).withHeaders("Access-Control-Allow-Origin" -> "*",
       "Access-Control-Allow-Methods" -> "POST, GET,PUT, DELETE, OPT",
