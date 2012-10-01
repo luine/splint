@@ -35,6 +35,11 @@ object YahooLocalSearch {
     } else {
       cid = "bf1929f6ab23005e9b80adf4fd0fc5ab"
     }
+    
+    val random_2 = new Random
+    var seed_2 = new String
+    seed += ((random.nextInt(10)).toString)
+    var offset = (Integer.parseInt(seed)) % 10
 
     val res = WS.url(API_URL)
       .setQueryParameter("appid", API_KEY)
@@ -43,6 +48,7 @@ object YahooLocalSearch {
       .setQueryParameter("dist", args.getOrElse("0.5", null))
       .setQueryParameter("query", args.getOrElse("query", null))
       .setQueryParameter("sort", "dist")
+      .setQueryParameter("start", offset.toString())
 
       .setQueryParameter("cid", cid)
       .get()
