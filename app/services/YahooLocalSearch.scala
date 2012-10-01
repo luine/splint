@@ -36,13 +36,15 @@ object YahooLocalSearch {
     } else if (Integer.parseInt(seed) % 4 == 2) {
       cid = "bf1929f6ab23005e9b80adf4fd0fc5ab"
     } else {
-      cid = "132c700e0ebf5a1d386e9b725d7d1e6b"
+      cid = "4136755b3cd84823420aec02ac373152"
     }
+    
+    
     
     val random_2 = new Random
     var seed_2 = new String
     seed_2 += ((random_2.nextInt(10)).toString)
-    var offset = (Integer.parseInt(seed_2)) % 3
+    var offset = (Integer.parseInt(seed_2)) % 4
 
     val res = WS.url(API_URL)
       .setQueryParameter("appid", API_KEY)
